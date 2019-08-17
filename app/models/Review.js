@@ -14,12 +14,9 @@ const reviewSchema = new Schema({
     },
     user: {
         type : Schema.Types.ObjectId,
-        ref : "User"
-    },
-    event : {
-        type : Schema.Types.ObjectId,
-        ref : 'Event'
+        ref : 'User'
     }
+    
 })
 const Review = mongoose.model('Review', reviewSchema)
 module.exports = Review

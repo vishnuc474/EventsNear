@@ -4,16 +4,19 @@ const Schema = mongoose.Schema
 
 
 const eventSchema = new Schema({
-
+    user : {
+        type : Schema.Types.ObjectId,
+        ref : 'User'
+    },
     name :{
         type : String,
-        required : true,
-        minlength : 10
+        required : true
+        // minlength : 10
     },
     description : {
         type : String,
-        required : true,
-        minlength : 200
+        required : true
+        // minlength : 20
     },
     category : {
         type : Schema.Types.ObjectId,
@@ -24,8 +27,8 @@ const eventSchema = new Schema({
         maxlength : 5
     },
     image : {
-        type : String,
-        required : true
+        type : String
+        // required : true
     },
     date : {
         startDate : {
@@ -33,17 +36,17 @@ const eventSchema = new Schema({
             required : true
         },
         endDate : {
-            type : Date,
+            type : Date
         }
 
     },
     seatCount : {
-        type : Number,
-        required : true
+        type : Number
+        // required : true
     },
     tktPrice : {
-        type : Number,
-        required : true
+        type : Number
+        // required : true
     },
     isListed : {
         type : Boolean

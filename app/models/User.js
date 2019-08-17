@@ -32,7 +32,7 @@ const userSchema = new Schema({
     }, 
     name : {
         type : String,
-        required : true
+        // required : true
     },
     bookedEvents : [{
         type : Schema.Types.ObjectId,
@@ -43,25 +43,25 @@ const userSchema = new Schema({
         ref : 'Event'
     }],
     ownEvents : [{
-        types : Schema.Types.ObjectId,
+        type : Schema.Types.ObjectId,
         ref : 'Event'
     }],
     subcribers : [{
-        types : Schema.Types.ObjectId,
+        type : Schema.Types.ObjectId,
         ref : 'User'
     }]
-    
-    // tokens: [
-    //     {
-    //         token: {
-    //             type: String
-    //         }, 
-    //         createdAt: {
-    //             type: Date, 
-    //             default: Date.now
-    //         }
-    //     }
-    // ]
+    ,
+    tokens: [
+        {
+            token: {
+                type: String
+            }, 
+            createdAt: {
+                type: Date, 
+                default: Date.now
+            }
+        }
+    ]
 })
 
 
