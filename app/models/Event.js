@@ -40,6 +40,7 @@ const eventSchema = new Schema({
         }
 
     },
+    seatDetails:{
     seatCount : {
         type : Number
         // required : true
@@ -47,6 +48,7 @@ const eventSchema = new Schema({
     tktPrice : {
         type : Number
         // required : true
+    }
     },
     isListed : {
         type : Boolean

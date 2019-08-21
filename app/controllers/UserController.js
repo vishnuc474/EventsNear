@@ -24,7 +24,8 @@ router.post('/login', function(req, res){
            return user.generateToken()
         })
         .then(function(token){
-            res.send(token)
+            res.send({token:token})
+            console.log(token)
         })
         .catch(function(err){
             res.send(err)
