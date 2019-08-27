@@ -1,19 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import axios from './config/axios'
 import App from './App'
 import {Provider} from 'react-redux'
+import axios from './config/axios'
 import {setUser} from './actions/user'
-import configureStore from './store/configureStore';
+import configureStore from './store/configureStore'
 
 const store = configureStore()
 
-store.subscribe(() =>{
-    console.log(store.getState())
+store.subscribe(()=>{
+    console.log('store', store.getState())
 })
+console.log('index')
+
 if(localStorage.getItem('userAuth')){
     console.log('indexjs',localStorage.getItem('userAuth'))
-    axios.get('/account', {
+    axios.get('user/account', {
         headers: {
             'x-auth': localStorage.getItem('userAuth')
         }
@@ -23,7 +25,7 @@ if(localStorage.getItem('userAuth')){
     })
 }
 const jsx = (
-    <Provider store = {store}>
+    <Provider store={store}>
         <App/>
     </Provider>
 )

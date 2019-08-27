@@ -9,7 +9,7 @@ router.post('/register', function(req, res){
     const user = new User(body)
     user.save()
         .then(function(user){
-            res.send()
+            res.send(user)
         }) 
         .catch(function(err){
             res.send(err)
@@ -19,13 +19,14 @@ router.post('/register', function(req, res){
 // localhost:3000/users/login 
 router.post('/login', function(req, res){
     const body = req.body 
+
     User.findByCredentials(body.email, body.password)
         .then(function(user){
            return user.generateToken()
+           
         })
         .then(function(token){
-            res.send({token:token})
-            console.log(token)
+            res.send({token : token})
         })
         .catch(function(err){
             res.send(err)
@@ -34,7 +35,7 @@ router.post('/login', function(req, res){
 })
 
 // localhost:3000/users/account 
-router.get('/account',  authenticateUser, function(req, res){
+router.get('/account',authenticateUser, function(req, res){
     const { user } = req 
     res.send(user)
 })

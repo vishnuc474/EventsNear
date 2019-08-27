@@ -3,7 +3,7 @@ const Event = require('../models/Event')
 module.exports.list=(req,res)=>{
     // note.userId = req.user._id
 
-    Event.find({user:req.user._id}).populate("category")//returns a promise object
+    Event.find({/*user:req.user._id*/}).populate("category")//returns a promise object
     .then((events)=>{
         res.json(events)
     })

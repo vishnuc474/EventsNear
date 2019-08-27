@@ -1,5 +1,8 @@
 import React from 'react'
 import axios from "../../config/axios"
+import { startSetUser } from '../../actions/user'
+import {connect} from 'react-redux'
+// import '../../login.css'
 
 class UserLogin extends React.Component {
 
@@ -8,12 +11,10 @@ class UserLogin extends React.Component {
         this.state = {
 
             email: "",
-            password: ""
+            password: "",errorMsg:''
 
         }
         this.handleChange = this.handleChange.bind(this)
-
-
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleReset = this.handleReset.bind(this)
 
@@ -45,37 +46,31 @@ class UserLogin extends React.Component {
 
         console.log('form data', formData)
 
+        // axios.post('/user/login', formData)
         axios.post('/user/login', formData)
             .then((response)=> {
-                // console.log(response.data)
+                 console.log(response.data)
                 if(response.data.hasOwnProperty('errors')) {
                     this.setState({
                         errorMsg: response.data.errors
                     })
                 } else{
+                    console.log("response",response)
                     localStorage.setItem('userAuth', response.data.token) 
                     this.props.history.push('/account')
                 }
-                
-
+            this.props.dispatch(startSetUser())
             }).catch(err => {
                 console.log(err)
             })
-
     }
-
-
-
-
-
-
-
     render() {
         return (
-            <div>
-
-                <form onSubmit={this.handleSubmit}>
-
+            <div className="login-page">
+            <h3>Login</h3>
+                {this.state.errorMsg && <p>{this.state.errorMsg}</p>}
+                <div className="form"><form onSubmit={this.handleSubmit}>
+                        
 
                     <label>E mail
                     <input type="email" value={this.state.email} onChange={this.handleChange} name="email" />
@@ -90,6 +85,7 @@ class UserLogin extends React.Component {
                     <button onClick={this.handleReset} >Reset</button>
 
                 </form>
+                </div>
             </div>
 
 
@@ -97,4 +93,4 @@ class UserLogin extends React.Component {
     }
 }
 
-export default UserLogin
+export default connect()(UserLogin)
