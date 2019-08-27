@@ -1,5 +1,5 @@
 import React from 'react'
-import {removeUser} from '../../actions/user'
+import {removeUser} from '../../redux/actions/user'
 import {connect} from 'react-redux'
 import _ from 'lodash'
 

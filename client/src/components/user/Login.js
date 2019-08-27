@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from "../../config/axios"
-import { startSetUser } from '../../actions/user'
+import { startSetUser } from '../../redux/actions/user'
 import {connect} from 'react-redux'
 // import '../../login.css'
 

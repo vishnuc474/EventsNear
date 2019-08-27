@@ -3,19 +3,25 @@ import {connect} from 'react-redux'
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import Register from './components/user/Register'
 import Login from './components/user/Login'
-import _ from 'lodash'
 import Account from './components/user/Account'
 import Logout from './components/user/Logout';
+import EventForm from './components/Events/Form'
+import NavBar from './components/common/NavBar'
+import _ from 'lodash'
 import './App.css'
+
+
 function App(props) {
   return (
-    <BrowserRouter>
+	<BrowserRouter>
+	        <NavBar/>
 			
 			<Route path="/user/register" component={Register} exact={true} />
 			<Route path="/login" component={Login}/>
 			<Route path="/account" component={Account}/>
 			<Route path="/logout" component={Logout} />
-    </BrowserRouter>
+			<Route path='/event/new' component={EventForm}/>
+    </BrowserRouter> 
   )
 		}
 const mapStateToProps = (state)=>{

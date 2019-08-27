@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import {Provider} from 'react-redux'
 import axios from './config/axios'
-import {setUser} from './actions/user'
-import configureStore from './store/configureStore'
+import {setUser} from './redux/actions/user'
+import configureStore from './redux/store/configureStore'
+import 'bootstrap/dist/css/bootstrap.css';
 
 const store = configureStore()
 

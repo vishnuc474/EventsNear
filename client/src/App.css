@@ -1,11 +1,12 @@
 .login-page  {
     background-color:cadetblue ;
+    border: 3px solid #ffffff;
+    height:500;
+    width:500;
+    align-content: center
 }
 
 .login-page > h3 {
     color:black;
-    text-align: center;
-}
-.login-page >  form {
     text-align: center;
 }
