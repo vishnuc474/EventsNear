@@ -20,7 +20,7 @@ router.get('/categories/:id',  categoriesController.show)
 router.put('/categories/:id',  categoriesController.update)
 router.delete('/categories/:id', categoriesController.destroy)
 
-router.get('/events',authenticateUser, eventsController.list)
+router.get('/events', eventsController.list)
 router.post('/events',authenticateUser, eventsController.create)
 router.get('/events/:id', authenticateUser, eventsController.show)
 router.delete('/events/:id', authenticateUser, eventsController.destroy)

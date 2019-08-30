@@ -1,7 +1,9 @@
 import React from 'react'
-import axios from '../../config/axios'
 import Select from 'react-select'
+import {connect } from 'react-redux'
+import _ from 'lodash'
 import { Badge,Button,Col, Form, FormGroup,Card, Label, Input, FormText } from 'reactstrap';
+import { startSetCategory } from '../../redux/actions/category';
 
 
 
@@ -12,7 +14,7 @@ class EventForm extends React.Component{
         this.state={
             name:'',
             description:'',
-            categories:[],
+            categories:this.props.categories,
             selectedcategories:[],
             maxTicket:'',
             image:'',
@@ -22,7 +24,7 @@ class EventForm extends React.Component{
             tktPrice:'',
             city:'',
             address:'',
-            isloading: true
+            isloading: false
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleCategoriesChange = this.handleCategoriesChange.bind(this)
@@ -31,14 +33,11 @@ class EventForm extends React.Component{
     }
 
     componentDidMount(){
-        axios.get('/categories')
-            .then(response => {
-                const categories = response.data
-                this.setState(()=>({
-                    categories,
-                    isloading : false 
-                }))
-            })
+        if(_.isEmpty(this.props.categories)){
+            this.props.dispatch(startSetCategory())
+            this.setState({isloading:true})
+        }
+        
     }
     handleCategoriesChange(selection) {
         const selectedcategories = selection
@@ -62,7 +61,7 @@ class EventForm extends React.Component{
             tktPrice:'',
             city:'',
             address:'',
-            isloading: true
+            isloading: false
         }))
     }
     handleSubmit(e) {
@@ -93,6 +92,10 @@ class EventForm extends React.Component{
             
             <div  >
             <Col sm="12" md={{ size: 6, offset: 3 }} >
+            {!this.state.isloading?(<p>Loading</p>)
+                :
+                (
+                <div>
             <Card style={{paddingBottom:"15px", border:'none', backgroundColor:'#f5f5f5'}}>
             <p><Badge color="secondary">Add New Event</Badge>  </p>
                 <Form>
@@ -191,10 +194,19 @@ class EventForm extends React.Component{
                     </FormGroup>
                     </Form>
             </Card>
-            </Col>
+            </div>    
+            )}
+          </Col>
             </div>
             
         )
     }
 }
-export default EventForm
+
+const mapStateToProps = (state) => {
+    return {
+        categories: state.categories,
+    }
+}
+
+export default connect(mapStateToProps)(EventForm)

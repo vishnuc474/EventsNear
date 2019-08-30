@@ -6,7 +6,8 @@ import axios from './config/axios'
 import {setUser} from './redux/actions/user'
 import configureStore from './redux/store/configureStore'
 import 'bootstrap/dist/css/bootstrap.css';
-
+import {startSetCategory} from './redux/actions/category'
+import {startSetEvent} from './redux/actions/event'
 const store = configureStore()
 
 store.subscribe(()=>{
@@ -25,6 +26,9 @@ if(localStorage.getItem('userAuth')){
         store.dispatch(setUser(response.data))
     })
 }
+
+store.dispatch(startSetCategory())
+store.dispatch(startSetEvent())
 const jsx = (
     <Provider store={store}>
         <App/>

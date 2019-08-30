@@ -6,6 +6,7 @@ import Login from './components/user/Login'
 import Account from './components/user/Account'
 import Logout from './components/user/Logout';
 import EventForm from './components/Events/Form'
+import ListEvent from './components/Events/List'
 import NavBar from './components/common/NavBar'
 import _ from 'lodash'
 import './App.css'
@@ -20,7 +21,8 @@ function App(props) {
 			<Route path="/login" component={Login}/>
 			<Route path="/account" component={Account}/>
 			<Route path="/logout" component={Logout} />
-			<Route path='/event/new' component={EventForm}/>
+			<Route path='/events/new' component={EventForm}/>
+			<Route path='/events' component={ListEvent}/>
     </BrowserRouter> 
   )
 		}

@@ -11,8 +11,9 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
-
-export default class Example extends React.Component {
+  import {connect} from 'react-redux'
+  import { BrowserRouter, Link, Route } from 'react-router-dom';
+class NavBar extends React.Component {
   constructor(props) {
     super(props);
 
@@ -29,33 +30,39 @@ export default class Example extends React.Component {
   render() {
     return (
       <div>
-        <Navbar color="#389e0d" light expand="md">
+        <Navbar color="red" light expand="md">
           <NavbarBrand href="/">EventsNear</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/components/">Components</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-              </NavItem>
+              
               <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Options
-                </DropdownToggle>
-                <DropdownMenu right>
+              <DropdownToggle nav caret>
+                Account
+              </DropdownToggle>
+              <DropdownMenu right>
+              {!this.props.user.name ?
+                (<div>
                   <DropdownItem>
-                    Login
+                  Profile
+                  </DropdownItem>
+                   <DropdownItem>
+                   <Link to="/logout">Logout</Link>
+                   </DropdownItem>
+                 </div>
+                 ) :
+                 (
+                   <div>
+                 <DropdownItem>
+                    Login 
                   </DropdownItem>
                   <DropdownItem>
-                    Register
+                     <Link to="/user/register">Register</Link>
                   </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    Reset
-                  </DropdownItem>
-                </DropdownMenu>
+                  </div>
+                 )
+              }
+              </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
           </Collapse>
@@ -64,3 +71,12 @@ export default class Example extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  console.log(state.user)
+  return {
+      user: state.user
+  }
+  
+}
+export default connect(mapStateToProps)(NavBar)
